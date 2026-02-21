@@ -55,6 +55,11 @@ export async function POST(req: NextRequest) {
     // send refresh token as cookie
     const response = NextResponse.json({
       accessToken,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type"
+        }
     });
 
     response.cookies.set("refreshToken", refreshToken, {
