@@ -81,6 +81,6 @@ export async function POST(req: NextRequest) {
 }
 export async function OPTIONS() {
   return new NextResponse(null, {
-    status: 200},
-    {headers:corsHeaders});
+    status: 200,
+    headers:corsHeaders});
 }
