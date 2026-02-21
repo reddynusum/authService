@@ -58,9 +58,9 @@ export async function POST(req: NextRequest) {
 
     // send refresh token as cookie
     const response = NextResponse.json({
-      accessToken,
+      accessToken},{
       headers:corsHeaders
-    });
+      });
 
     response.cookies.set("refreshToken", refreshToken, {
       httpOnly: true,
@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
 }
 export async function OPTIONS() {
   return new NextResponse(null, {
-    status: 200,
-    headers:corsHeaders
+    status: 200},
+    {headers:corsHeaders
   });
 }
