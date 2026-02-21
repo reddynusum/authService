@@ -6,7 +6,11 @@ import {
   generateAccessToken,
   generateRefreshToken,
 } from "@/lib/auth/jwt";
-
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "http://localhost:5173",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type"
+};
 export async function POST(req: NextRequest) {
   try {
     await connectDB();
@@ -55,11 +59,7 @@ export async function POST(req: NextRequest) {
     // send refresh token as cookie
     const response = NextResponse.json({
       accessToken,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "POST, OPTIONS",
-          "Access-Control-Allow-Headers": "Content-Type"
-        }
+      headers:corsHeaders
     });
 
     response.cookies.set("refreshToken", refreshToken, {
@@ -78,4 +78,10 @@ export async function POST(req: NextRequest) {
       { status: 500 }
     );
   }
+}
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 200,
+    headers:corsHeaders
+  });
 }
