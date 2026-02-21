@@ -18,9 +18,9 @@ export async function POST(req: NextRequest) {
     const { email, password } = await req.json();
 
     if (!email || !password) {
+      console.log("missing fields");
       return NextResponse.json(
-        { message: "Missing fields" ,headers:corsHeaders},
-        { status: 400 }
+        { message: "Missing fields",status: 400} ,{headers:corsHeaders},
       );
     }
 
@@ -28,9 +28,9 @@ export async function POST(req: NextRequest) {
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
+      console.log("user already exists");
       return NextResponse.json(
-        { message: "User already exists",headers:corsHeaders },
-        { status: 400 }
+        { message: "User already exists",status: 400},{headers:corsHeaders },
       );
     }
 
@@ -74,8 +74,7 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.log("error:",error);
     return NextResponse.json(
-      { message: "Signup failed",headers:corsHeaders },
-      { status: 500 }
+      { message: "Signup failed",status:500},{headers:corsHeaders },
     );
   }
 }
