@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
 
     if (!email || !password) {
       return NextResponse.json(
-        { message: "Missing fields" },
+        { message: "Missing fields" ,headers:corsHeaders},
         { status: 400 }
       );
     }
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
 
     if (existingUser) {
       return NextResponse.json(
-        { message: "User already exists" },
+        { message: "User already exists",headers:corsHeaders },
         { status: 400 }
       );
     }
@@ -74,7 +74,7 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.log("error:",error);
     return NextResponse.json(
-      { message: "Signup failed" },
+      { message: "Signup failed",headers:corsHeaders },
       { status: 500 }
     );
   }
