@@ -24,7 +24,7 @@ export async function GET(req: Request) {
     const token = auth.split(" ")[1];
     const user = verifyAccessToken(token);
 
-    return NextResponse.json({ user,headers:corsHeaders });
+    return NextResponse.json({ user},{headers:corsHeaders });
   } catch {
     return NextResponse.json({ message: "Invalid token",status:403},{headers:corsHeaders});
   }
