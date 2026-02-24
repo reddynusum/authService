@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
   try {
     await connectDB();
 
-    const { email, password } = await req.json();
+    const { email, password ,role } = await req.json();
 
     if (!email || !password) {
       console.log("missing fields");
