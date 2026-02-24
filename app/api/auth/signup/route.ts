@@ -46,11 +46,13 @@ export async function POST(req: NextRequest) {
     // generate tokens
     const accessToken = generateAccessToken(
       {userId:user._id.toString(),
-        email:user.email}
+        email:user.email,
+      role:user.role}
         );
     const refreshToken = generateRefreshToken({
       userId:user._id.toString(),
-      email:user.email});
+      email:user.email,
+    role:user.role});
 
     // store refresh token
     user.refreshToken = refreshToken;

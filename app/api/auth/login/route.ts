@@ -6,7 +6,11 @@ import {
   generateAccessToken,
   generateRefreshToken,
 } from "@/lib/auth/jwt";
-
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "http://localhost:5173",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type"
+};
 export async function POST(req: NextRequest) {
   try {
     await connectDB();
@@ -29,24 +33,26 @@ export async function POST(req: NextRequest) {
 
     if (!isMatch) {
       return NextResponse.json(
-        { message: "Invalid credentials" },
-        { status: 401 }
+        { message: "Invalid credentials",status:401 },{headers:corsHeaders}
       );
     }
 
     // generate tokens
     const accessToken = generateAccessToken(
         {userId:user._id.toString(),
-        email:user.email});
+        email:user.email,
+      role:user.role});
     const refreshToken = generateRefreshToken(
         {userId:user._id.toString(),
-            email:user.email});
+            email:user.email,
+          role:user.role});
 
     user.refreshToken = refreshToken;
     await user.save();
 
     const response = NextResponse.json({
       accessToken,
+      headers:corsHeaders
     });
 
     response.cookies.set("refreshToken", refreshToken, {
@@ -61,8 +67,8 @@ export async function POST(req: NextRequest) {
 
   } catch (error) {
     return NextResponse.json(
-      { message: "Login failed" },
-      { status: 500 }
+      { message: "Login failed",status:500 },
+      { headers:corsHeaders }
     );
   }
 }

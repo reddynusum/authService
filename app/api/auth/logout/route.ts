@@ -3,6 +3,11 @@ import User from "@/app/models/User";
 import { connectDB } from "@/lib/db/mongodb";
 import { verifyRefreshToken } from "@/lib/auth/jwt";
 import { cookies } from "next/headers";
+const corsHeaders = {
+    "Access-Control-Allow-Origin": "http://localhost:5173",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type"
+  };
 export async function POST(req:NextRequest){
     try{
         await connectDB();
@@ -12,7 +17,7 @@ export async function POST(req:NextRequest){
         return NextResponse.json({
             message:"user already logged out",
             status:200
-        })
+        },{headers:corsHeaders})
     }
     const decoded = verifyRefreshToken(refreshToken);
     console.log(refreshToken);
@@ -24,7 +29,7 @@ export async function POST(req:NextRequest){
         await user.save();
     }
     console.log(user);
-    const response = NextResponse.json({message:"logged out successfully"});
+    const response = NextResponse.json({message:"logged out successfully"},{headers:corsHeaders});
     response.cookies.set("refreshToken", "", {
         httpOnly: true,
         expires: new Date(0),
@@ -37,7 +42,7 @@ catch(error){
     return NextResponse.json({
         message:"logged out failed",
         status:500
-    });
+    },{headers:corsHeaders});
 }
 }
 export async function GET() {
