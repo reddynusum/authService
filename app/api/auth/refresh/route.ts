@@ -7,6 +7,7 @@ import {
   generateAccessToken,
 } from "@/lib/auth/jwt";
 
+
 export async function POST() {
     try{
   await connectDB();
@@ -26,7 +27,7 @@ export async function POST() {
     return NextResponse.json({}, { status: 401 });
 
   const accessToken =
-    generateAccessToken({userId:user._id.toString(),email:user.email});
+    generateAccessToken({userId:user._id.toString(),email:user.email,role:user.role});
     console.log("accessToken:",accessToken);
   return NextResponse.json({ accessToken });
 }
