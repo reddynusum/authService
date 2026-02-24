@@ -41,6 +41,7 @@ export async function POST(req: NextRequest) {
     const user = await User.create({
       email,
       password: hashedPassword,
+      role:role,
     });
 
     // generate tokens
