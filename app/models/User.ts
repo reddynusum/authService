@@ -25,6 +25,10 @@ const UserSchema = new Schema(
       type: String,
       default: null,
     },
+    role:{
+      type:String,
+      default:null,
+    }
   },
   {
     timestamps: true, // createdAt & updatedAt auto
