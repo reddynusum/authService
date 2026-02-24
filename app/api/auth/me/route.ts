@@ -3,7 +3,15 @@ import { verifyAccessToken } from "@/lib/auth/jwt";
 const corsHeaders = {
   "Access-Control-Allow-Origin": "http://localhost:5173",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type"
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Allow-Credentials": "true",
+};
+
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 200,
+    headers: corsHeaders,
+  });
 };
 export async function GET(req: Request) {
   const auth = req.headers.get("authorization");
