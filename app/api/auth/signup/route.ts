@@ -9,7 +9,8 @@ import {
 const corsHeaders = {
   "Access-Control-Allow-Origin": "http://localhost:3000",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type"
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Allow-Credentials": "true"
 };
 export async function POST(req: NextRequest) {
   try {
