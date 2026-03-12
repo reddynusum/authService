@@ -4,7 +4,7 @@ import { connectDB } from "@/lib/db/mongodb";
 import { verifyRefreshToken } from "@/lib/auth/jwt";
 import { cookies } from "next/headers";
 const corsHeaders = {
-    "Access-Control-Allow-Origin": "http://localhost:5173",
+    "Access-Control-Allow-Origin": "http://localhost:3000",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type"
   };
