@@ -71,6 +71,13 @@ export async function POST(req: NextRequest) {
       path: "/",
       maxAge: 7 * 24 * 60 * 60,
     });
+    response.cookies.set("accessToken", accessToken, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+      path: "/",
+      maxAge: 7 * 24 * 60 * 60,
+    });
 
     return response;
   } catch {
