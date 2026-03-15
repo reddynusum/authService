@@ -67,14 +67,14 @@ export async function POST(req: NextRequest) {
     response.cookies.set("refreshToken", refreshToken, {
       httpOnly: true,
       secure: false,
-      sameSite: "lax",
+      sameSite: "none",
       path: "/",
       maxAge: 7 * 24 * 60 * 60,
     });
     response.cookies.set("accessToken", accessToken, {
       httpOnly: true,
       secure: false,
-      sameSite: "lax",
+      sameSite: "none",
       path: "/",
       maxAge: 7 * 24 * 60 * 60,
     });
